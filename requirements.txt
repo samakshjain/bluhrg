@@ -1,4 +1,11 @@
-BeautifulSoup==3.2.1
+@Author: Samaksh Jain <ybl>
+@Date:   Wednesday, July 6th 2016, 9:25:47 pm(IST)
+@Email:  samakshjain@live.com
+@Last modified by:   ybl
+@Last modified time: Wednesday, July 6th 2016, 9:39:10 pm(IST)
+@License: MIT
+
+
 click==6.6
 Flask==0.11.1
 gunicorn==19.4.5
