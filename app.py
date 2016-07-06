@@ -13,7 +13,6 @@ from contextlib import closing
 
 # Flask config
 bluhrg = Flask(__name__)
-bluhrg.config.from_object(__name__)
 bluhrg.config.from_object(os.environ['APP_SETTINGS'])
 
 # init db
@@ -41,7 +40,7 @@ def teardown_request(exception):
 
 @bluhrg.route('/')
 def index():
-    return "Hallo! Let's start the bluhrg!"
+    return "<h3>Hallo! Let's start the bluhrg!</h3>"
 
 if __name__ == "__main__":
     bluhrg.run()
