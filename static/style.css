@@ -1,0 +1,15 @@
+.navbar {
+    border-radius: 0;
+    background-color: tomato;
+    border: none;
+}
+
+.navbar-inverse .navbar-brand {
+    font-weight: bolder;
+    font-size: 20px;
+    color: white;
+}
+
+.navbar-inverse .navbar-brand:focus {
+    color: lightgray;
+}

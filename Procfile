@@ -1,1 +1,1 @@
-web: gunicorn app:bluhrg
+web: gunicorn app:app
