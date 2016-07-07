@@ -6,29 +6,18 @@
 # @License: MIT
 
 import os
-import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash, send_from_directory
 from contextlib import closing
+from flask_sqlalchemy import SQLAlchemy
 
 # Flask config
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-# connect to db
-def connect_db():
-    """Connects to the specific database."""
-    rv = sqlite3.connect(app.config['DATABASE'])
-    rv.row_factory = sqlite3.Row
-    return rv
-
-def get_db():
-    """Opens a new database connection if there is none yet for the
-    current application context.
-    """
-    if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = connect_db()
-    return g.sqlite_db
+from models import BluhrgPost
 
 @app.teardown_appcontext
 def close_db(error):
@@ -36,25 +25,10 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
-# init db
-def init_db():
-    db = get_db()
-    with app.open_resource('db.sql', mode='r') as f:
-        db.cursor().executescript(f.read())
-    db.commit()
-
-# adding commnad to initdb
-@app.cli.command('initdb')
-def initdb_command():
-    """Initializes the database."""
-    init_db()
-    print 'Initialized the database.'
 
 @app.route('/')
 def index():
-    db = get_db()
-    cur = db.execute('select heading, content from blag order by id desc')
-    entries = [dict(heading=row[0], content=row[1]) for row in cur.fetchall()]
+    entries = BluhrgPost.query.all()
     return render_template('main.html', entries=entries)
 
 @app.route('/favicon.ico')
@@ -64,10 +38,10 @@ def favicon():
 
 @app.route('/add', methods=['POST'])
 def bluhrg_post():
-    db = get_db()
-    db.execute('insert into blag (heading, content) values (?, ?)',
-                 [request.form['heading'], request.form['content']])
-    db.commit()
+    print request.form['title'], request.form['content'], request.form['tags']
+    bluhrg_post = BluhrgPost(request.form['title'], request.form['content'], request.form['tags'])
+    db.session.add(bluhrg_post)
+    db.session.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('index'))
 

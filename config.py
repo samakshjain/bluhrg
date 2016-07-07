@@ -11,10 +11,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
-    DATABASE = 'bluhrg.db'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SECRET_KEY = 'blahblahbluhrg'
-    USERNAME = 'admin'
-    PASSWORD = 'bluhrgadmin'
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
