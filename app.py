@@ -5,11 +5,10 @@
 # @Last modified time: Wednesday, July 6th 2016, 9:35:16 pm(IST)
 # @License: MIT
 
-import os
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash, send_from_directory
-from contextlib import closing
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # Flask config
 app = Flask(__name__)
@@ -17,14 +16,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import BluhrgPost
-
-@app.teardown_appcontext
-def close_db(error):
-    """Closes the database again at the end of the request."""
-    if hasattr(g, 'sqlite_db'):
-        g.sqlite_db.close()
-
+from models import *
 
 @app.route('/')
 def index():
