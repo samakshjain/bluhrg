@@ -31,7 +31,7 @@ def favicon():
 @app.route('/add', methods=['POST'])
 def bluhrg_post():
     print request.form['title'], request.form['content'], request.form['tags']
-    bluhrg_post = BluhrgPost(request.form['title'], request.form['content'], request.form['tags'])
+    bluhrg_post = BluhrgPost(title=request.form['title'], content=request.form['content'], tags=request.form['tags'])
     db.session.add(bluhrg_post)
     db.session.commit()
     flash('New entry was successfully posted')

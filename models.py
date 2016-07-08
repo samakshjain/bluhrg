@@ -16,10 +16,12 @@ class BluhrgPost(db.Model):
     content = db.Column(db.String())
     tags = db.Column(db.String())
 
-    def __init__(self, title, content, tags):
-        self.title = title
-        self.content = content
-        self.tags = tags
+    def __init__(self, *initial_data, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+        for dictionary in initial_data:
+            for key in dictionary:
+                setattr(self, key, dictionary[key])
 
     def __repr__(self):
         return '<id {}>'.format(self.id)

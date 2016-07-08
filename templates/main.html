@@ -5,7 +5,9 @@
             <ul class=entries>
                 {% for entry in entries %}
                 <li>
+                    {% if entry.title %}
                     <h2>{{ entry.title }}</h2>
+                    {% endif %}
                     {{ entry.content|safe }}
                     <hr>
                     <code>{{ entry.tags }}</code>
