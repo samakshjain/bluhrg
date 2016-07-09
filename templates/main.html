@@ -1,33 +1,70 @@
+<!--
+@Author: Samaksh Jain <ybl>
+@Date:   Friday, July 8th 2016, 10:46:37 pm(IST)
+@Email:  samakshjain@live.com
+@Last modified by:   ybl
+@Last modified time: Saturday, July 9th 2016, 5:16:06 pm(IST)
+@License: MIT
+-->
+
+
 {% extends "base.html" %}
 {% block body %}
-    <div class="container" style="height: 100vh">
+    <div class="container">
         <div class="row">
-            <ul class="list-unstyled">
-                {% for entry in entries %}
-                <li>
-                    {% if entry.title %}
-                        <h2>{{ entry.title }}</h2>
-                    {% endif %}
-                    {{ entry.content|safe }}
+            <div class="col-sm-2">
+                <form action="{{ url_for('title_search') }}" method="post" class="form-inline">
+                    <fieldset class="form-group">
+                        <div class="input-group">
+                            <label for="title">Search</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter post title">
+                        </div>
+                        </br>
+                        <button type="submit" value=Post class="btn btn-primary">Submit</button>
+                    </fieldset>
+                </form>
+                <hr>
+                <ul class="list-unstyled">
+                    <h3>Tags</h3>
                     <hr>
-                    {% if entry.tags %}
-                        <code>
-                            <a href="#">{{ entry.tags }}</a>
-                        </code>
-                    {% endif %}
-                    <div class="or-spacer">
-                      <div class="mask"></div>
-                    </div>
-                {% else %}
-                <li><em>No bluhrgs</em>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-lg-12" style="text-align:center">
-                <p>
-                    <a href="#">Prev</a> || <a href="#">Next</a>
-                </p>
+                    {% for tag in tags %}
+                        <li>
+                            <code>
+                                <a href="/search/tags/{{ tag.tag_name }}">{{ tag.tag_name }}</a>
+                            </code>
+                        </li>
+                    {% endfor%}
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                <ul class="list-unstyled">
+                    {% for entry in entries %}
+                    <li>
+                        {% if entry.title %}
+                            <h2>{{ entry.title }}</h2>
+                        {% endif %}
+                        {{ entry.content|safe }}
+                        <hr>
+                        {% if entry.tags %}
+                            {% for tag in entry.tags %}
+                            <code>
+                                <a href="/search/tags/{{ tag.tag_name }}">{{ tag.tag_name }}</a>
+                            </code>
+                            &nbsp;
+                            {% endfor %}
+                        {% endif %}
+                        <div class="or-spacer">
+                          <div class="mask"></div>
+                        </div>
+                    {% else %}
+                    <li><em>No bluhrgs</em>
+                    {% endfor %}
+                </ul>
+                <div style="text-align:center">
+                    <p>
+                        <a href="#">Prev</a> || <a href="#">Next</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

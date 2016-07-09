@@ -2,7 +2,7 @@
 # @Date:   Wednesday, July 6th 2016, 9:17:28 pm(IST)
 # @Email:  samakshjain@live.com
 # @Last modified by:   ybl
-# @Last modified time: Wednesday, July 6th 2016, 9:19:13 pm(IST)
+# @Last modified time: Saturday, July 9th 2016, 1:49:20 pm(IST)
 # @License: MIT
 
 
@@ -16,6 +16,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
+
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True

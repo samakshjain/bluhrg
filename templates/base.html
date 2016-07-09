@@ -1,3 +1,13 @@
+<!--
+@Author: Samaksh Jain <ybl>
+@Date:   Friday, July 8th 2016, 10:24:00 pm(IST)
+@Email:  samakshjain@live.com
+@Last modified by:   ybl
+@Last modified time: Saturday, July 9th 2016, 4:57:47 pm(IST)
+@License: MIT
+-->
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,7 +34,7 @@
     </head>
     <body>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -32,9 +42,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">bluhrg!</a>
+              <a class="navbar-brand" href="/">bluhrg!</a>
             </div>
         </div>
-        {% block body %}{% endblock %}
+        <div style="padding-top: 70px;">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
