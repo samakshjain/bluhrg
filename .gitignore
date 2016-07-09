@@ -2,3 +2,4 @@ ff
 .pyc
 .db
 .env
+migrations
