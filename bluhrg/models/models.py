@@ -1,4 +1,4 @@
-# @Last modified time: Saturday, July 9th 2016, 4:36:20 pm(IST)
+# @Last modified time: Sunday, July 10th 2016, 9:40:36 pm(IST)
 # @Author: Samaksh Jain <ybl>
 # @Date:   Friday, July 8th 2016, 1:42:12 am(IST)
 # @Email:  samakshjain@live.com
@@ -6,8 +6,8 @@
 # @License: MIT
 
 
-from app import db
 from sqlalchemy.ext.hybrid import hybrid_property
+from bluhrg import db
 
 # Helper table for tagging
 tags = db.Table('tags',

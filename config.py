@@ -2,7 +2,7 @@
 # @Date:   Wednesday, July 6th 2016, 9:17:28 pm(IST)
 # @Email:  samakshjain@live.com
 # @Last modified by:   ybl
-# @Last modified time: Saturday, July 9th 2016, 1:49:20 pm(IST)
+# @Last modified time: Monday, July 11th 2016, 11:23:32 am(IST)
 # @License: MIT
 
 
@@ -13,8 +13,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SECRET_KEY = 'blahblahbluhrg'
-    DEBUG = False
-    TESTING = False
     CSRF_ENABLED = True
 
 
@@ -25,3 +23,8 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+
+
+class ProductionConfig(Config):
+    DEBUG = False
+    TESTING = False

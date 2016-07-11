@@ -3,7 +3,7 @@
 @Date:   Friday, July 8th 2016, 10:46:37 pm(IST)
 @Email:  samakshjain@live.com
 @Last modified by:   ybl
-@Last modified time: Saturday, July 9th 2016, 5:16:06 pm(IST)
+@Last modified time: Monday, July 11th 2016, 11:14:40 am(IST)
 @License: MIT
 -->
 
@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
-                <form action="{{ url_for('title_search') }}" method="post" class="form-inline">
+                <form action="{{ url_for('main.title_search') }}" method="post" class="form-inline">
                     <fieldset class="form-group">
                         <div class="input-group">
                             <label for="title">Search</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-sm-10">
                 <ul class="list-unstyled">
-                    {% for entry in entries %}
+                    {% for entry in entries.items %}
                     <li>
                         {% if entry.title %}
                             <h2>{{ entry.title }}</h2>
@@ -62,8 +62,8 @@
                 </ul>
                 <div style="text-align:center">
                     <p>
-                        <a href="#">Prev</a> || <a href="#">Next</a>
-                    </p>
+                        {% if entries.has_prev %}<a href="{{ url_for('main.index', page=entries.prev_num) }}">&lt; Previous</a>{% else %}&lt; Previous{% endif %} ||
+                        {% if entries.has_next %}<a href="{{ url_for('main.index', page=entries.next_num) }}">Next &gt;</a>{% else %}Next &gt;{% endif %}
                 </div>
             </div>
         </div>

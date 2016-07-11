@@ -1,4 +1,4 @@
 ff
-.pyc
-.db
+*.pyc
+*.db
 .env
