@@ -2,13 +2,13 @@
 # @Date:   Saturday, July 9th 2016, 12:45:33 pm(IST)
 # @Email:  samakshjain@live.com
 # @Last modified by:   ybl
-# @Last modified time: Saturday, July 9th 2016, 3:39:05 pm(IST)
+# @Last modified time: Monday, July 11th 2016, 11:44:49 am(IST)
 # @License: MIT
 
 
 import pytumblr
-from app import db
-from models import BluhrgPost, Tag
+from manage import db
+from bluhrg.models import BluhrgPost, Tag
 import argparse
 import os
 

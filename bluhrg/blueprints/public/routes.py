@@ -2,7 +2,7 @@
 # @Date:   Sunday, July 10th 2016, 7:45:54 pm(IST)
 # @Email:  samakshjain@live.com
 # @Last modified by:   ybl
-# @Last modified time: Monday, July 11th 2016, 10:59:45 am(IST)
+# @Last modified time: Monday, July 11th 2016, 12:48:37 pm(IST)
 # @License: MIT
 
 
@@ -51,26 +51,32 @@ def get_metadata():
 
 # Route to search by tags
 @main.route('/search/tags/<string:tag_name>')
-def tag_search(tag_name):
-    try:
-        tags = Tag.query.order_by(Tag.tag_name)
-        filtered_enteries = BluhrgPost.query.filter(
-                            BluhrgPost.tags.any(tag_name=tag_name))
-        return render_template('main/main.html', entries=filtered_enteries,
-                               tags=tags)
-    except TemplateNotFound:
-        abort(404)
+@main.route('/search/tags/<string:tag_name>/<int:page>')
+def tag_search(tag_name, page=1):
+    # try:
+    tags = Tag.query.order_by(Tag.tag_name)
+    filtered_enteries = BluhrgPost.query.filter(
+                        BluhrgPost.tags.any(tag_name=tag_name
+                                            )).paginate(1,
+                                                        PER_PAGE,
+                                                        False)
+    return render_template('main/main.html', entries=filtered_enteries,
+                           tags=tags)
+    # except TemplateNotFound:
+    #     abort(404)
 
 
 # Route to search by title
-@main.route('/search/title', methods=['GET', 'POST'])
-def title_search():
+@main.route('/search/title', methods=["POST"])
+@main.route('/search/title/<int:page>', methods=['POST'])
+def title_search(page=1):
     try:
         tags = Tag.query.order_by(Tag.tag_name)
         filtered_enteries = BluhrgPost.query.filter(
                             BluhrgPost.title.ilike("%" + request.form['title']
-                                                   + "%")
-        )
+                                                   + "%")).paginate(page,
+                                                                    PER_PAGE,
+                                                                    False)
         return render_template('main/main.html', entries=filtered_enteries,
                                tags=tags)
     except TemplateNotFound:
